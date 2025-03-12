@@ -31,6 +31,7 @@ html {
 }
 
 body {
+    background-color: #8B1FF8;
     min-height: 100vh;
     background: url("imagens/pattern.png");
     background-size: cover;
