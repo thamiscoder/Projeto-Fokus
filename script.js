@@ -4,26 +4,44 @@ const curtoBtn = document.querySelector('.app__card-button--curto');
 const longoBtn = document.querySelector('.app__card-button--longo');
 const image = document.querySelector('.app__image');
 const text = document.querySelector('.app__title');
+const botoes = document.querySelectorAll('.app__card-button');
+const musicaFocoInput = document.querySelector('#alternar-musica');
+const musica = new Audio('/sons/luna-rise-part-one.mp3');
 const timer = document.querySelector('#timer');
 const startPause = document.querySelector('.app__card-primary-button');
 const tempoDeFoco = 1500;
 const tempoCurto = 300;
 const tempoLongo = 900;
+musica.loop = true;
+
+musicaFocoInput.addEventListener('change', () => {
+    if(musica.paused) {
+        musica.play();
+    } else {
+        musica.pause();
+    }
+})
 
 
 focoBtn.addEventListener('click', () => {
     alterarContexto('foco');
+    focoBtn.classList.add('active');
 })
 
 curtoBtn.addEventListener('click', () => {
     alterarContexto('descanso-curto');
+    curtoBtn.classList.add('active');
 })
 
 longoBtn.addEventListener('click', () => {
     alterarContexto('descanso-longo');
+    longoBtn.classList.add('active');
 })
 
 function alterarContexto(contexto) {
+    botoes.forEach(function(contexto) {
+        contexto.classList.remove('active');
+    })
     html.setAttribute('data-contexto', contexto);
     image.setAttribute('src', `/imagens/${contexto}.png`);
 
