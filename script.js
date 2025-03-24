@@ -13,12 +13,15 @@ const tempoLongo = 900;
 
 focoBtn.addEventListener('click', () => {
     html.setAttribute('data-contexto', 'foco');
+    image.setAttribute('src', '/imagens/foco.png');
 })
 
 curtoBtn.addEventListener('click', () => {
     html.setAttribute('data-contexto', 'descanso-curto');
+    image.setAttribute('src', '/imagens/descanso-curto.png');
 })
 
 longoBtn.addEventListener('click', () => {
     html.setAttribute('data-contexto', 'descanso-longo');
+    image.setAttribute('src', '/imagens/descanso-longo.png');
 })
