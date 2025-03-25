@@ -8,14 +8,15 @@ const text = document.querySelector('.app__title');
 const botoes = document.querySelectorAll('.app__card-button');
 const startPause = document.querySelector('#start-pause');
 const iniciarOuPausarBtn = document.querySelector('#start-pause span');
+const tempoNaTela = document.querySelector('#timer');
 const musicaFocoInput = document.querySelector('#alternar-musica');
 const musica = new Audio('/sons/luna-rise-part-one.mp3');
 const musicaPlay = new Audio('/sons/play.wav');
 const musicaPause = new Audio('/sons/pause.mp3');
 const musicaStop = new Audio('/sons/beep.mp3');
-const timer = document.querySelector('#timer');
 
-let tempoDecorridoEmSegundos = 5;
+
+let tempoDecorridoEmSegundos = 1500;
 let intervaloId = null;
 
 musica.loop = true;
@@ -30,21 +31,25 @@ musicaFocoInput.addEventListener('change', () => {
 
 
 focoBtn.addEventListener('click', () => {
+    tempoDecorridoEmSegundos = 1500;
     alterarContexto('foco');
     focoBtn.classList.add('active');
 })
 
 curtoBtn.addEventListener('click', () => {
+    tempoDecorridoEmSegundos = 300;
     alterarContexto('descanso-curto');
     curtoBtn.classList.add('active');
 })
 
 longoBtn.addEventListener('click', () => {
+    tempoDecorridoEmSegundos = 900;
     alterarContexto('descanso-longo');
     longoBtn.classList.add('active');
 })
 
 function alterarContexto(contexto) {
+    mostrarTempo();
     botoes.forEach(function(contexto) {
         contexto.classList.remove('active');
     })
@@ -80,7 +85,7 @@ const contagemRegressiva = () => {
         return;
     }
     tempoDecorridoEmSegundos -= 1;
-    console.log('temporizador', + tempoDecorridoEmSegundos);
+    mostrarTempo();
 } 
 
 startPause.addEventListener('click', iniciarOuPausar);
@@ -103,3 +108,11 @@ function zerar() {
     iniciarOuPausarBtn.textContent = 'Começar';
     imgBtn.setAttribute('src', 'imagens/play_arrow.png');
 }
+
+function mostrarTempo() {
+    const tempo = new Date(tempoDecorridoEmSegundos * 1000);
+    const tempoFormatado = tempo.toLocaleTimeString('pt-br', {minute: '2-digit', second: '2-digit'})
+    tempoNaTela.innerHTML = `${tempoFormatado}`;
+}
+
+mostrarTempo();
